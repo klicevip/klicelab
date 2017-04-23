@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>klice实验室</title>
+</head>
+<body>
+<ul th:each="experiment : ${experiments}">
+    <li>
+        <span th:text="${experiment.name}"></span>
+        <a th:href="|/${experiment.id}|">查看</a>
+    </li>
+</ul>
+</body>
+</html>
