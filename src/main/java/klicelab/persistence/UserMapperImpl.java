@@ -1,0 +1,42 @@
+package klicelab.persistence;
+
+import klicelab.model.User;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import java.util.Date;
+
+/**
+ * Created by hasee on 2017/4/26.
+ */
+@Repository
+public class UserMapperImpl implements UserMapper {
+    @Autowired
+    SqlSessionFactory sessionFactory;
+
+    @Override
+    public User getUser(int id) {
+        SqlSession session = sessionFactory.openSession();
+        try {
+            return session.getMapper(UserMapper.class).getUser(id);
+        }finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public void register(User user) {
+        user.setCreateTime(new Date());
+        SqlSession session = sessionFactory.openSession();
+        try{
+            session.getMapper(UserMapper.class).register(user);
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+        finally {
+            session.close();
+        }
+    }
+}
