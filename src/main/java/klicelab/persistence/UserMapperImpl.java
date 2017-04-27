@@ -28,8 +28,7 @@ public class UserMapperImpl implements UserMapper {
 
     @Override
     public void register(User user) {
-        user.setCreateTime(new Date());
-        SqlSession session = sessionFactory.openSession();
+        SqlSession session = sessionFactory.openSession(true);//make session autocommit
         try{
             session.getMapper(UserMapper.class).register(user);
         }catch (Exception ex){

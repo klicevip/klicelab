@@ -1,5 +1,7 @@
 package klicelab.model;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 /**
@@ -8,9 +10,16 @@ import java.util.Date;
 public class User {
     int id;
     String email;
+    @NotNull(message = "密码不能为空")
+    @Size(min = 4, message = "密码至少要4位")
     String password;
+    @NotNull(message = "用户名不能为空")
     String name;
     Date createTime;
+
+    public User(){
+        setCreateTime(new Date());
+    }
 
     public int getId() {
         return id;
