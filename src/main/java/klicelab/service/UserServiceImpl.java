@@ -11,12 +11,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl implements UserService {
 
-    @Autowired
     UserMapper mapper;
+
+    public UserServiceImpl(@Autowired UserMapper mapper) {
+        this.mapper = mapper;
+    }
 
     @Override
     public boolean userNameExist(String userName) {
-        return  mapper.getByName(userName) != null;
+        return mapper.getByName(userName) != null;
     }
 
     @Override
