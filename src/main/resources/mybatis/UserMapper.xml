@@ -9,4 +9,7 @@
     <insert id="register" useGeneratedKeys="true" keyProperty="id">
         insert into users (name,password,email,createTime) values (#{name},#{password},#{email},#{createTime})
     </insert>
+    <select id="getByName" resultType="klicelab.model.User">
+        select * from users where name=#{name}
+    </select>
 </mapper>

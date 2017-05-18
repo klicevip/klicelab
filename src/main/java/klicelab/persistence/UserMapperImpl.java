@@ -31,10 +31,18 @@ public class UserMapperImpl implements UserMapper {
         SqlSession session = sessionFactory.openSession(true);//make session autocommit
         try{
             session.getMapper(UserMapper.class).register(user);
-        }catch (Exception ex){
-            ex.printStackTrace();
         }
         finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public User getByName(String name) {
+        SqlSession session = sessionFactory.openSession();
+        try{
+            return session.getMapper(UserMapper.class).getByName(name);
+        }finally {
             session.close();
         }
     }

@@ -1,5 +1,7 @@
 package klicelab.model;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
@@ -8,24 +10,28 @@ import java.util.Date;
  * Created by hasee on 2017/4/26.
  */
 public class User {
-    int id;
+    Integer id;
+
     String email;
-    @NotNull(message = "密码不能为空")
+
+    @NotBlank(message = "用户名不能为空")//字符串不能使用NotNull，空字符串可以通过验证
+    String name;
+
+    @NotBlank(message = "密码不能为空")
     @Size(min = 4, message = "密码至少要4位")
     String password;
-    @NotNull(message = "用户名不能为空")
-    String name;
+
     Date createTime;
 
     public User(){
         setCreateTime(new Date());
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

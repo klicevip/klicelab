@@ -36,7 +36,7 @@ public class SpringConfig {
     }
 
     @Bean
-    public DataSource dataSource() throws PropertyVetoException {
+    public DataSource dataSource(org.springframework.core.env.Environment environment) throws PropertyVetoException {
         ComboPooledDataSource dataSource = new ComboPooledDataSource();
         dataSource.setJdbcUrl("jdbc:MySQL://localhost:3306/klicelab?serverTimezone=UTC");
         dataSource.setUser("root");

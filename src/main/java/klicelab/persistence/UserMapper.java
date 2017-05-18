@@ -14,4 +14,11 @@ public interface UserMapper {
 
 //    @Insert("insert into user (name,password,email,createTime) values (#{name},#{password},#{email},#{createTime})")
     void register(User user);
+
+    /**
+     * 根据用户名查询
+     * @param name
+     * @return
+     */
+    User getByName(String name);
 }
