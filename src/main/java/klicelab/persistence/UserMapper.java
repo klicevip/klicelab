@@ -13,7 +13,7 @@ public interface UserMapper {
     User getUser(int id);
 
 //    @Insert("insert into user (name,password,email,createTime) values (#{name},#{password},#{email},#{createTime})")
-    void register(User user);
+    void register(User user) throws DbException;
 
     /**
      * 根据用户名查询

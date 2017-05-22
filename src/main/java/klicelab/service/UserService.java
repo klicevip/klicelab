@@ -1,6 +1,7 @@
 package klicelab.service;
 
 import klicelab.model.User;
+import klicelab.persistence.DbException;
 
 /**
  * Created by klice on 2017/5/18.
@@ -26,5 +27,5 @@ public interface UserService {
      * 注册用户
      * @param user
      */
-    void register(User user);
+    void register(User user) throws DbException;
 }

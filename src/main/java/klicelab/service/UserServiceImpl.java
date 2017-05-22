@@ -1,6 +1,7 @@
 package klicelab.service;
 
 import klicelab.model.User;
+import klicelab.persistence.DbException;
 import klicelab.persistence.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,7 +29,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void register(User user) {
+    public void register(User user) throws DbException {
         mapper.register(user);
     }
 }

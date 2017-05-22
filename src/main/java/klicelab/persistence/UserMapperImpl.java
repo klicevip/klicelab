@@ -27,10 +27,13 @@ public class UserMapperImpl implements UserMapper {
     }
 
     @Override
-    public void register(User user) {
+    public void register(User user) throws DbException {
         SqlSession session = sessionFactory.openSession(true);//make session autocommit
         try{
             session.getMapper(UserMapper.class).register(user);
+        }
+        catch (Exception ex){
+            throw new DbException();
         }
         finally {
             session.close();
