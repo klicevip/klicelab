@@ -13,12 +13,14 @@ import org.junit.Test;
 import static org.mockito.Mockito.*;
 
 import org.junit.rules.ExpectedException;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.sql.SQLDataException;
 
-
+@RunWith(SpringRunner.class)
 public class UserServiceImplTest {
 
     @Mock
