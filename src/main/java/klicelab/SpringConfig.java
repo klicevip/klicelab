@@ -1,6 +1,7 @@
 package klicelab;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
+import klicelab.web.filters.SessionFilter;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.mapping.Environment;
 import org.apache.ibatis.session.Configuration;
@@ -8,8 +9,10 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.apache.ibatis.transaction.TransactionFactory;
 import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 
+import javax.servlet.Filter;
 import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
 import java.io.IOException;
@@ -45,5 +48,14 @@ public class SpringConfig {
         dataSource.setMinPoolSize(4);
         dataSource.setMaxPoolSize(50);
         return dataSource;
+    }
+
+    @Bean
+    public FilterRegistrationBean sessionFilter(SessionFilter sessionFilter){
+        FilterRegistrationBean registrationBean = new FilterRegistrationBean();
+        registrationBean.setFilter(sessionFilter);
+        registrationBean.setOrder(1);
+        registrationBean.addUrlPatterns("/*");
+        return registrationBean;
     }
 }
