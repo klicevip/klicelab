@@ -1,6 +1,8 @@
 package klicelab.service;
 
+import klicelab.model.LoginRequest;
 import klicelab.model.User;
+import klicelab.model.UserLoginResult;
 import klicelab.persistence.DbException;
 
 /**
@@ -24,8 +26,22 @@ public interface UserService {
     User getById(Integer id);
 
     /**
+     * 根据用户名查询
+     * @param name 用户名
+     * @return 用户
+     */
+    User getByName(String name);
+
+    /**
      * 注册用户
      * @param user
      */
     void register(User user) throws DbException;
+
+    /**
+     * 登录
+     * @param loginRequest 登录请求
+     * @return 登录结果
+     */
+    UserLoginResult login(LoginRequest loginRequest);
 }

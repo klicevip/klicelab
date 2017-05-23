@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>登录</title>
+</head>
+<body>
+<form method="post">
+    <!--<input type="hidden" name="backUrl" th:value="${backUrl}"></input>-->
+    <div th:if="${error}!=null">
+        <ul>
+            <li th:text="${error}"></li>
+        </ul>
+    </div>
+    用户名：<input type="text" name="name"></input>
+    密码：<input type="password" name="password"></input>
+    <input type="submit"></input>
+</form>
+</body>
+</html>
