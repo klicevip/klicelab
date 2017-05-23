@@ -95,10 +95,10 @@ public class UserController {
     public String index(Model model, HttpServletRequest httpServletRequest) {
         HttpSession httpSession = httpServletRequest.getSession(false);
         if (httpSession == null)
-            return "redirect:register";
+            return "redirect:login";
         Session session = sessionService.get(httpSession.getId());
         if (session == null)
-            return "redirect:register";
+            return "redirect:login";
 
         User user = userService.getById(session.getUserId());
         model.addAttribute(user);
