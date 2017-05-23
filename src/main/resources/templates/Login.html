@@ -5,15 +5,16 @@
 </head>
 <body>
 <form method="post">
-    <!--<input type="hidden" name="backUrl" th:value="${backUrl}"></input>-->
     <div th:if="${error}!=null">
         <ul>
             <li th:text="${error}"></li>
         </ul>
     </div>
-    用户名：<input type="text" name="name"></input>
-    密码：<input type="password" name="password"></input>
-    <input type="submit"></input>
+    用户名：<input type="text" name="name" />
+    密码：<input type="password" name="password" />
+    <input type="submit" />
+
+    <a href="/user/register" th:href="@{'/user/register?backUrl='+${param.backUrl == null ? '': param.backUrl[0]}}">注册</a>
 </form>
 </body>
 </html>
