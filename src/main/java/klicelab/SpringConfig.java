@@ -1,6 +1,7 @@
 package klicelab;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
+import klicelab.service.SessionService;
 import klicelab.web.filters.SessionFilter;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.mapping.Environment;
@@ -51,11 +52,16 @@ public class SpringConfig {
     }
 
     @Bean
-    public FilterRegistrationBean sessionFilter(SessionFilter sessionFilter){
+    public SessionFilter sessionFilter(SessionService sessionService){
+        return new SessionFilter(sessionService);
+    }
+
+    @Bean
+    public FilterRegistrationBean sessionFilterRegistration(SessionFilter sessionFilter){
         FilterRegistrationBean registrationBean = new FilterRegistrationBean();
         registrationBean.setFilter(sessionFilter);
         registrationBean.setOrder(1);
-        registrationBean.addUrlPatterns("/*");
+        registrationBean.addUrlPatterns("/user/index");
         return registrationBean;
     }
 }

@@ -94,11 +94,11 @@ public class UserController {
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String index(Model model, HttpServletRequest httpServletRequest) {
         HttpSession httpSession = httpServletRequest.getSession(false);
-        if (httpSession == null)
-            return "redirect:login";
+//        if (httpSession == null)
+//            return "redirect:login";
         Session session = sessionService.get(httpSession.getId());
-        if (session == null)
-            return "redirect:login";
+//        if (session == null)
+//            return "redirect:login";
 
         User user = userService.getById(session.getUserId());
         model.addAttribute(user);
