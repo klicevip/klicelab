@@ -51,10 +51,10 @@ public class SpringConfig {
         return dataSource;
     }
 
-    @Bean
-    public SessionFilter sessionFilter(SessionService sessionService){
-        return new SessionFilter(sessionService);
-    }
+//    @Bean
+//    public SessionFilter sessionFilter(SessionService sessionService){
+//        return new SessionFilter(sessionService);
+//    }
 
     @Bean
     public FilterRegistrationBean sessionFilterRegistration(SessionFilter sessionFilter){

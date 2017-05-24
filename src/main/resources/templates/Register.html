@@ -10,9 +10,9 @@
             <li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
         </ul>
     </div>
-    用户名：<input type="text" name="name"></input>
-    密码：<input type="password" name="password"></input>
-    <input type="submit"></input>
+    用户名：<input name="name" />
+    密码：<input type="password" name="password" />
+    <input type="submit" value="注册" />
 </form>
 </body>
 </html>

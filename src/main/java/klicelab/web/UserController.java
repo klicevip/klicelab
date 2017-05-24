@@ -13,6 +13,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -48,7 +49,7 @@ public class UserController {
 
         User user = userService.getByName(loginRequest.getName());
         String sessionId = httpServletRequest.getSession().getId();
-        newSession(sessionId,user);
+        newSession(sessionId, user);
 
         String backUrl = loginRequest.getBackUrl();
         if (backUrl == null || backUrl.isEmpty())
@@ -64,7 +65,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String register(@Validated User user, Errors errors, HttpServletRequest httpServletRequest) throws DbException {
+    public String register(@RequestParam String backUrl, @Validated User user, Errors errors, HttpServletRequest httpServletRequest) throws DbException {
         if (errors.hasErrors()) {
             return "register";
         }
@@ -79,11 +80,14 @@ public class UserController {
         userService.register(user);
 
         String sessionId = httpServletRequest.getSession().getId();
-        newSession(sessionId,user);
-        return "redirect:index";
+        newSession(sessionId, user);
+        if (backUrl == null || backUrl.isEmpty()) {
+            backUrl = "index";
+        }
+        return "redirect:" + backUrl;
     }
 
-    private void newSession(String sessionId, User user){
+    private void newSession(String sessionId, User user) {
         Session session = new Session();
         session.setId(sessionId);
         session.setCreatedTime(new Date());
