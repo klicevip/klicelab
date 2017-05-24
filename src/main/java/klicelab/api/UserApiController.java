@@ -18,7 +18,7 @@ public class UserApiController {
     @Autowired
     UserService userService;
 
-    @RequestMapping("/index/{id}")
+    @RequestMapping("/{id}")
     public User index(@PathVariable int id) {
         return userService.getById(id);
     }

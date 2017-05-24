@@ -37,10 +37,10 @@ public class UserTest {
     @Before
     public void setup(){
         mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
-        initSession();
+        initMockSession();
     }
 
-    void initSession(){
+    void initMockSession(){
         mockHttpSession = new MockHttpSession(webApplicationContext.getServletContext());
         String sessionId = mockHttpSession.getId();
         Session session = new Session();
