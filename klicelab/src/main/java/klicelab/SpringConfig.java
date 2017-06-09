@@ -50,7 +50,7 @@ public class SpringConfig {
 //    }
 
     @Bean
-    public FilterRegistrationBean sessionFilterRegistration(SessionFilter sessionFilter){
+    public FilterRegistrationBean sessionFilterRegistration(SessionFilter sessionFilter) {
         FilterRegistrationBean registrationBean = new FilterRegistrationBean();
         registrationBean.setFilter(sessionFilter);
         registrationBean.setOrder(1);
@@ -59,7 +59,16 @@ public class SpringConfig {
     }
 
     @Bean("sendRegisterEmailJobExecutor")
-    public TaskExecutor sendRegisterEmailJobExecutor(){
+    public TaskExecutor sendRegisterEmailJobExecutor() {
+        return createTaskExecutor();
+    }
+
+    @Bean("experimentJobExecutor")
+    public TaskExecutor experimentJobExecutor() {
+        return createTaskExecutor();
+    }
+
+    TaskExecutor createTaskExecutor() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         executor.setKeepAliveSeconds(1);
         executor.setCorePoolSize(5);

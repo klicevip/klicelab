@@ -2,6 +2,7 @@ package klicelab.job;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -15,7 +16,7 @@ public class SendRegisterEmailJob {
     Log log = LogFactory.getLog(SendRegisterEmailJob.class);
     TaskExecutor taskExecutor;
 
-    public SendRegisterEmailJob(TaskExecutor taskExecutor){
+    public SendRegisterEmailJob(@Qualifier("sendRegisterEmailJobExecutor") TaskExecutor taskExecutor){
         this.taskExecutor = taskExecutor;
     }
 
