@@ -6,6 +6,8 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.task.TaskExecutor;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -54,5 +56,15 @@ public class SpringConfig {
         registrationBean.setOrder(1);
         registrationBean.addUrlPatterns("/user/index");
         return registrationBean;
+    }
+
+    @Bean("sendRegisterEmailJobExecutor")
+    public TaskExecutor sendRegisterEmailJobExecutor(){
+        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+        executor.setKeepAliveSeconds(1);
+        executor.setCorePoolSize(5);
+        executor.setMaxPoolSize(10);
+        executor.setQueueCapacity(10);
+        return executor;
     }
 }
