@@ -11,6 +11,9 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * Created by hasee on 2017/4/25.
@@ -60,20 +63,26 @@ public class SpringConfig {
 
     @Bean("sendRegisterEmailJobExecutor")
     public TaskExecutor sendRegisterEmailJobExecutor() {
-        return createTaskExecutor();
+        return createTaskExecutor("email");
     }
 
     @Bean("experimentJobExecutor")
     public TaskExecutor experimentJobExecutor() {
-        return createTaskExecutor();
+        return createTaskExecutor("experiment");
     }
 
-    TaskExecutor createTaskExecutor() {
+    TaskExecutor createTaskExecutor(String threadGroupName) {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         executor.setKeepAliveSeconds(1);
         executor.setCorePoolSize(5);
         executor.setMaxPoolSize(10);
         executor.setQueueCapacity(10);
+        executor.setThreadGroupName(threadGroupName);
         return executor;
+    }
+
+    @Bean
+    public ExecutorService executorService(){
+        return Executors.newFixedThreadPool(5);
     }
 }
